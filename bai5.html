@@ -1,0 +1,47 @@
+
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <title>Form Đăng Ký</title>
+</head>
+<body>
+
+    <h2>Đăng Ký</h2>
+
+    <form id="registerForm">
+        <label>Họ tên:</label><br>
+        <input type="text" id="fullname"><br><br>
+
+        <label>Địa chỉ Email:</label><br>
+        <input type="email" id="email"><br><br>
+
+        <label>Tỉnh/Thành phố:</label><br>
+        <select id="city">
+            <option value="Hà Nội">Hà Nội</option>
+            <option value="Hồ Chí Minh">Hồ Chí Minh</option>
+            <option value="Đà Nẵng">Đà Nẵng</option>
+        </select><br><br>
+
+        <label>Ghi chú:</label><br>
+        <textarea id="note"></textarea><br><br>
+
+        <button type="button" id="btnSubmit">Đăng ký</button>
+    </form>
+
+    <script>
+        document.getElementById("btnSubmit").addEventListener("click", function () {
+
+            const name = document.getElementById("fullname").value;
+            const email = document.getElementById("email").value;
+            const city = document.getElementById("city").value;
+            const note = document.getElementById("note").value;
+
+            console.log("Họ tên: " + name);
+            console.log("Địa chỉ email: " + email);
+            console.log("Tỉnh/Thành phố: " + city);
+            console.log("Ghi chú: " + note);
+        });
+    </script>
+
+</body>
+</html>
