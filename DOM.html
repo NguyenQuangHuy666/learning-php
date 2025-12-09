@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tổng hợp Ví dụ JavaScript DOM</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #eef1f7;
+            padding: 25px;
+        }
+
+        /* ===== STYLE 1 ===== */
+        #text {
+            color: purple;
+            font-size: 22px;
+            padding: 6px;
+            border: 1px solid #aaa;
+            border-radius: 4px;
+            background: #fff;
+        }
+        .highlight {
+            color: #ff5500;
+            font-weight: bold;
+        }
+
+        /* ===== STYLE 2 ===== */
+        .box {
+            background: #fff;
+            padding: 20px;
+            margin: 20px auto;
+            border-radius: 8px;
+            width: 90%;
+            max-width: 450px;
+            box-shadow: 0px 3px 8px rgba(0,0,0,0.1);
+        }
+
+        /* ===== STYLE LOGIN ===== */
+        .login-form input {
+            width: 100%;
+            padding: 10px;
+            margin: 6px 0;
+            border: 1px solid #bbb;
+            border-radius: 5px;
+        }
+        .login-form button {
+            width: 100%;
+            padding: 10px;
+            background: #2d89ef;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            margin-top: 10px;
+            cursor: pointer;
+        }
+        .msg {
+            padding: 10px;
+            margin-top: 10px;
+            text-align: center;
+            border-radius: 5px;
+            font-weight: bold;
+        }
+        .error { background: #ffd5d5; color: red; }
+        .success { background: #d4ffd4; color: green; }
+
+        #image {
+            width: 200px;
+            display: block;
+            margin: auto;
+            border: 2px solid #333;
+            border-radius: 6px;
+        }
+
+        hr {
+            margin: 35px 0;
+            border: none;
+            border-top: 2px dashed #bbb;
+        }
+    </style>
+</head>
+<body>
+
+<h1 style="text-align:center;">Bộ Ví Dụ DOM & Validation</h1>
+
+<!-- 1. Style -->
+<div class="box">
+    <h2>1. Lấy và Gán Style</h2>
+    <p id="text">Đây là đoạn chữ để thử lấy & thay đổi style.</p>
+    <button onclick="layStyle()">Lấy Style</button>
+    <button onclick="ganStyle()">Thay Style mới</button>
+    <p id="result">Kết quả: </p>
+</div>
+
+<hr>
+
+<!-- 2. DOM cơ bản -->
+<div class="box">
+    <h2>2. DOM cơ bản</h2>
+    <h3 id="title">Tiêu đề ban đầu</h3>
+    <p class="description">Đoạn văn bản thứ nhất.</p>
+    <p class="description">Đoạn văn bản thứ hai.</p>
+    <button onclick="thayDoiDom()">Thay đổi nội dung & Class</button>
+
+    <ul id="list">
+        <li>Item 1</li>
+        <li>Item 2</li>
+    </ul>
+</div>
+
+<hr>
+
+<!-- 3. Replace -->
+<div class="box">
+    <h2>3. Thay thế hình ảnh</h2>
+    <img id="image" src="https://s.yimg.com/fz/api/res/1.2/yVqta2vkZoD23Ilf0Xo3TQ--~C/YXBwaWQ9c3JjaGRkO2ZpPWZpbGw7aD05Njt3PTk2/https://tse2.mm.bing.net/th?q=%e1%ba%a2nh+Con+Ch%c3%b3+C%c6%b0%e1%bb%9di&pid=Api&mkt=en-US&cc=US&setlang=en&adlt=strict&t=1" alt="Ảnh ban đầu">
+    <button onclick="thayAnh()">Đổi ảnh</button>
+</div>
+
+<hr>
+
+<!-- 4. Login -->
+<div class="box login-form">
+    <h2>4. Kiểm tra đăng nhập</h2>
+
+    <input type="text" id="username" placeholder="Tên đăng nhập">
+    <input type="password" id="password" placeholder="Mật khẩu">
+    <button onclick="kiemTra()">Đăng nhập</button>
+
+    <div id="message" class="msg"></div>
+</div>
+
+<script>
+
+    /* ====== 1. STYLE ====== */
+    function layStyle() {
+        let e = document.getElementById("text");
+        let c = window.getComputedStyle(e);
+
+        document.getElementById("result").innerHTML =
+            `Màu: <b>${c.color}</b> - Cỡ chữ: <b>${c.fontSize}</b>`;
+    }
+
+    function ganStyle() {
+        let e = document.getElementById("text");
+        e.style.color = "#0a7b0a";
+        e.style.background = "#eaffea";
+        e.style.border = "2px dashed green";
+        document.getElementById("result").textContent = "Đã đổi style thành công!";
+    }
+
+    /* ====== 2. THAO TÁC DOM ====== */
+    function thayDoiDom() {
+        document.getElementById("title").textContent = "Tiêu đề đã được cập nhật!";
+
+        let p = document.querySelector(".description");
+        p.classList.add("highlight");
+
+        let li = document.createElement("li");
+        li.textContent = "Item mới thêm!";
+        document.getElementById("list").appendChild(li);
+    }
+
+    /* ====== 3. REPLACE ====== */
+    function thayAnh() {
+        let img = document.getElementById("image");
+        img.src = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRGh0z8xVQw0JduypRM7ExYGQYZ4r1FqvUxgQ&s";
+        img.alt = "Ảnh đã thay đổi";
+        alert("Đã đổi ảnh thành công!");
+    }
+
+    /* ====== 4. VALIDATION ====== */
+    function kiemTra() {
+        let u = document.getElementById("username").value.trim();
+        let p = document.getElementById("password").value.trim();
+        let msg = document.getElementById("message");
+
+        msg.className = "msg"; 
+
+        if (u === "" || p === "") {
+            msg.textContent = "Vui lòng nhập đầy đủ thông tin!";
+            msg.classList.add("error");
+        } else {
+            msg.textContent = "Đăng nhập thành công!";
+            msg.classList.add("success");
+        }
+    }
+</script>
+
+</body>
+</html>
